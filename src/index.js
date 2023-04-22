@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import {AsyncPaginate} from "react-select-async-paginate";
 import reportWebVitals from './reportWebVitals';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+   <h1 class="heading ">Welcome to weather Reports</h1>
     <App />
   </React.StrictMode>
 );

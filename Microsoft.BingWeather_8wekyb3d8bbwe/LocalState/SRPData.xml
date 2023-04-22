@@ -1,0 +1,1 @@
+<SRPData schemaVersion="1" iteration="1"><Outcomes><Outcome id="AppLaunch" timesOccurred="0" /><Outcome id="FavoriteAdded" timesOccurred="0" /><Outcome id="LocationPinned" timesOccurred="0" /></Outcomes><Threshold launches="1" daysLaunched="1" dayOfLastLaunch="12" monthOfLastLaunch="10" yearOfLastLaunch="2020" userHasAccepted="false" timesPolled="0"/></SRPData>
