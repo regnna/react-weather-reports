@@ -2,16 +2,10 @@
   "name": "react-weather-app",
   "version": "0.1.0",
   "private": true,
-<<<<<<< HEAD
-=======
 
   "proxy": "https://localhost:3000",
   "homepage": "http://.",
 
-  "proxy":"https://localhost:3000",
-  "homepage": ".",
-
->>>>>>> 37876bbcb5fe19825276c6d709352c476d45508a
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
