@@ -4,6 +4,10 @@ import Link from "next/link"
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { Inter } from 'next/font/google'
+ 
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({ subsets: ['latin'] })
 import { Icons } from "@/components/icons"
 
 interface MainNavProps {
@@ -12,11 +16,13 @@ interface MainNavProps {
 
 export function MainNav({ items }: MainNavProps) {
   return (
-    <div className="flex gap-7 md:gap-10 pb-8">
-      <Link href="/" className="flex items-center justify-center space-x-2">
-        <Icons.logo className="h-6 w-6" />
+       <div className="flex gap-7 md:gap-10 pb-8">
+      <Link href="/" className="flex  space-x-2">
+        {/* <Icons.logo className="h-6 w-6" /> */}
         {/* <span className="inline-block font-bold"> */}
-          <h1 className="inline-flex font-extrabold ite">{siteConfig.name}</h1>
+        
+          <h1 className="inline-flex font-extrabold lg:text-3xl md:text-3xl sm:text-3xl items-center">{siteConfig.name}</h1>
+          
         {/* </span> */}
       </Link>
       {items?.length ? (
