@@ -11,6 +11,12 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import tosteer from "@/components/tosteer"
 import Tosteer from "@/components/tosteer"
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+
 
 export const metadata: Metadata = {
   title: {
@@ -34,10 +40,14 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+const queryClient = new QueryClient()
+
   return (
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
+    {/* <QueryClientProvider client={queryClient}> */}
+        
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
@@ -57,7 +67,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </ThemeProvider>
 
         </body>
+      {/* </QueryClientProvider> */}
+
       </html>
+
     </>
   )
 }
