@@ -75,38 +75,29 @@ interface WeatherData {
     sunset: number;
   };
 }
-let firstDataOutside;
 let deta:WeatherData;
-let uniqueDates:any = [];
-var filteredData:any = {};
 
-function datess(data:WeatherData){
-  if (data && data.list) {
-    data.list.forEach(function(entry) {
-      var date = new Date(entry.dt * 1000);
-      var dateString = date.toISOString().split('T')[0];
-      var hour = date.getHours();
-  
-      // Check if the hour is after 6 AM and if the date is not already in the filteredData
-      if (hour >= 6 && !(dateString in filteredData)) {
-        filteredData[dateString] = entry;
-      }
-    });
-  }
-  
-  console.log("FilterData:",filteredData); 
-}
+var filteredData:any = {};
+var filteredArray:any={}
+
+
 async function  API(place){
   // const [place, setPlace] = useAtom(placeAtom)
 
   const {data}=await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_API_KEY}&cnt=56`)
   // const {data}=await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=pune&appid=b5a3f6ac1b020bd3d54bc6a319d146c2&cnt=56`)
-console.log("API data: ",place)
-  deta=data;
+console.log("API data: ",data)
+  // deta=data;
+  // console.log("API data: ",deta)
 
-  if (deta && deta.list) {
-    deta.list.forEach(function(entry) {
+  if (data && data.list) {
+ filteredData= {};
+
+    data.list.forEach(function(entry) {
       var date = new Date(entry.dt * 1000);
+      // console.log(date)
+      // console.log(entry)
+      
       var dateString = date.toISOString().split('T')[0];
       var hour = date.getHours();
   
@@ -118,30 +109,9 @@ console.log("API data: ",place)
   }
   
   console.log("FilterData:",filteredData); // This will print the filtered data
-  // console.log("FilterData:",filteredData)); 
-  
-  
-// if (deta && deta.list) {
-//   var dates = deta.list.map(function(entry) {
-//     return new Date(entry.dt * 1000).toISOString().split('T')[0];
-//   });
+  filteredArray = Object.values(filteredData);
 
-//   // Remove duplicates
-//   for (var i = 0; i < dates.length; i++) {
-//     if (uniqueDates.indexOf(dates[i]) === -1) {
-//       uniqueDates.push(dates[i]);
-//     }
-//   }
-// }
-
-//   // Filtering data to get the first entry after 6 AM for each unique date
-//   const firstDataForEachDate = uniqueDates.map((dates) => {
-//     return data?.list.find((entry) => {
-//       const entryDate = new Date(entry.dt * 1000).toISOString().split("T")[0];
-//       const entryTime = new Date(entry.dt * 1000).getHours();
-//       return entryDate === date && entryTime >= 6;
-//     });
-//   });
+  
   return data;
 }
 
@@ -158,24 +128,20 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
         setPlace("india")
       }
       const data =API(place);
-      // await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=pune&appid=${process.env.NEXT_PUBLIC_API_KEY}&cnt=56`)
-      // return data;
-      // const data: WeatherData = await response.json();
+      
     return data;
     }
-      // fetch('https://api.openweathermap.org/data/2.5/forecast?q=pune&appid=b5a3f6ac1b020bd3d54bc6a319d146c2&cnt=56').then((res) =>
-      //   res.json(),
-      // ),
+   
   });
   useEffect(()=>{
  refetch();   
   },[place,refetch])
-  firstDataOutside=data?.list[0];
-  var filteredArray = Object.values(filteredData);
+  // firstDataOutside=data?.list[0];
+  filteredArray = Object.values(filteredData);
 
   // const dailydata=datess(data);
 
-  console.log("data",deta)
+  console.log("data",data)
   if (isLoading) return (
     <div className="flex items-center min-h-screen justify-center">
       <p className="animate-bounce">Loading....</p>
@@ -325,9 +291,6 @@ export default function IndexPage() {
 
   const queryClient = new QueryClient();
 
-//  data= await Guga()
-  // if (error) return 'An error has occurred: ' + error.message
-  // const {toast}=useToast()
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
@@ -336,16 +299,7 @@ export default function IndexPage() {
           
       <Guga/>
     </QueryClientProvider>
-    {/* <Skeleton> */}
-
-    
-        {/* <Button onClick={() => {
-        toast({
-          description: "Your message has been sent.",
-        })
-      }}>Toast</Button> */}
-        {/* <Toast>Ramesh</Toast> */}
-
+   
       </div>
     </section>
   )
