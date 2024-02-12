@@ -144,28 +144,31 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
   console.log("data",data)
   if (isLoading) return (
     <div className="flex items-center min-h-screen justify-center">
-      <p className="animate-bounce">Loading....</p>
+      <LoadingSkeleton/>
+      {/* <p className="animate-bounce">Loading....</p> */}
     </div>
   )
   
 
 //  console.log(dailydata)
-  return ( <div>
-    <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9 w-full pb-10 pt-4">
+  return ( <div className="mx-10">
+    <main className="px-3 max-w-screen-lg mx-auto flex flex-col gap-9 w-full pb-10 pt-4">
       {/* today data */}
       {loadingCity ? <WeatherSkeleton/> :
       <>
       <section className="space-y-4">
-        <div className="space-y-4">
-          <h2 className="flex gap-1 text-2xl items-end">
-            <p>
-            ({format(parseISO(data?.list[0]?.dt_txt ?? ' ' ),'EEEE')})
-            </p>
-            <p className="text-lg">
+        <div className="space-t-4 ">
+        <div className="text-center text-4xl">
+      {/* <p className="flex gap-1 text-4xl items-end  "> */}
+      <p>
+            {format(parseISO(data?.list[0]?.dt_txt ?? ' ' ),'EEEE')}
+            
             ({format(parseISO(data?.list[0]?.dt_txt ?? ' ' ),'dd.MM.yyyy')})
             </p>
-          </h2>
-          <Container className="gap-10 px-6 items-center">
+            {/* </p> */}
+
+      </div>
+          <Container className="gap-10 px-6 items-center mt-6">
             <div className="flex flex-col px-4">
               <span className="text-5xl">
               {convertKelvinToCelsius(data?.list[0]?.main.temp ?? 296.37)}°C
@@ -223,7 +226,7 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
                           )}
                         />
           </Container>
-          <Container className="bg-yellow-300/80 px-4 gap-2 justify-around">
+          <Container className=" px-4 text-black gap-2 justify-around w-full">
 <WeatherDetails visability={metertokm(data?.list[0]?.visibility ?? 1000)} 
 airPressure={`${data?.list[0]?.main.pressure}hPa`}
 windSpeed={windconv(data?.list[0]?.wind.speed ?? 5) }
@@ -245,7 +248,10 @@ humidity={`${data?.list[0].main.humidity ?? 99 }%`}
       </section>
       {/* 7 days forcast data  */}
      <section className="flex w-full flex-col gap-4">
-      <p className="text-2xl ">Forcast (7 days)</p>
+      <div className="text-center">
+      <p className="text-4xl  ">Forcast (7 days)</p>
+
+      </div>
 
 
 
@@ -292,8 +298,8 @@ export default function IndexPage() {
   const queryClient = new QueryClient();
 
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
+    <section className="container grid items-center">
+      <div className="flex w-screen flex-col items-start gap-2">
        
         <QueryClientProvider client={queryClient}>
           
@@ -309,6 +315,8 @@ export default function IndexPage() {
 // export default IndexPage;
 function WeatherSkeleton() {
   return (
+    <div className="mx-10">
+    <main className="px-3 max-w-screen-lg mx-auto flex flex-col gap-9 w-full pb-10 pt-4">
     <section className="space-y-8 ">
       {/* Today's data skeleton */}
       <div className="space-y-2 animate-pulse">
@@ -344,5 +352,35 @@ function WeatherSkeleton() {
         ))}
       </div>
     </section>
+    </main>
+    </div>
   );
 }
+
+
+const HourlyForecastSkeleton = () => (
+  <section className="skeleton-hourly-forecast animate-pulse">
+    {[...Array(24)].map((_, i) => (
+      <div key={i} className="skeleton-hourly-item"></div>
+    ))}
+  </section>
+);
+
+// Skeleton for the 7-day forecast
+const SevenDayForecastSkeleton = () => (
+  <div className="skeleton-7day-forecast">
+    {[...Array(7)].map((_, i) => (
+      <div key={i} className="skeleton-7day-item"></div>
+    ))}
+  </div>
+);
+
+// Main loading skeleton that includes all the individual skeletons
+const LoadingSkeleton = () => (
+  <div className="skeleton-container">
+    <WeatherSkeleton />
+    <HourlyForecastSkeleton />
+    <SevenDayForecastSkeleton />
+  </div>
+);
+
