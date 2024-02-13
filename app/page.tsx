@@ -93,7 +93,7 @@ console.log("API data: ",data)
   if (data && data.list) {
  filteredData= {};
 
-    data.list.forEach(function(entry) {
+    data.list.forEach(function(entry:any) {
       var date = new Date(entry.dt * 1000);
       // console.log(date)
       // console.log(entry)
@@ -255,7 +255,7 @@ humidity={`${data?.list[0].main.humidity ?? 99 }%`}
 
 
 
-      {filteredArray.map((d,i)=>(
+      {filteredArray.map((d:any,i:any)=>(
       <ForecastWeatherDetails 
       key={i}
       description={d?.weather[0].description ?? ""}
