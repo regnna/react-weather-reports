@@ -81,7 +81,7 @@ var filteredData:any = {};
 var filteredArray:any={}
 
 
-async function  API(place){
+async function  API(place:string){
   // const [place, setPlace] = useAtom(placeAtom)
 
   const {data}=await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_API_KEY}&cnt=56`)
