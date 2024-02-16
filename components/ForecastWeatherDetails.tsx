@@ -54,7 +54,7 @@ const ForecastWeatherDetails = (props: ForecastWeatherDetailProps) => {
 </div>
 </section>
 {/* right section*/}
-<section className='overflow-x-auto flex justify-between lg:gap-4 sm:gap-1  lg:px-4 sm:px-1 w-full pr-10'>
+<section className='overflow-x-auto flex justify-between lg:gap-4 sm:gap-1  lg:px-4 sm:px-1 w-full lg:pr-10 md:pr-9 sm:pr-7'>
 <WeatherDetails {...props}/>
 </section>
     </Container>

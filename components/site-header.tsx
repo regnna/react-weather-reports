@@ -94,7 +94,7 @@ function handleCurrentLocation(){
       <div className="grid grid-flow-col justify-stretch
       mb-{6} h-16 sm:justify-between sm:space-x-0  ">
 <div className="mt-4 mx-6">
-        <MainNav items={siteConfig.mainNav}  />
+        {/* <MainNav items={siteConfig.mainNav}  /> */}
 </div>
         {/* <div></div> */}
         <div className="flex flex-1 mt-4 mx-6 justify-center space-x-2 align-top">
