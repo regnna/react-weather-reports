@@ -58,7 +58,7 @@ const queryClient = new QueryClient()
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <div className="flex">
-                 <div  className="  ml-15%" >{children}</div></div>
+                 <div  className="  lg:ml-15%" >{children}</div></div>
 
                 <Tosteer/>
             </div>

@@ -151,13 +151,15 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
   
 
 //  console.log(dailydata)
-  return ( <div className="mx-10">
-    <main className="px-3 max-w-screen-lg mx-auto flex flex-col gap-9 w-full pb-10 pt-4">
+  return ( 
+    <div>
+  {/* <div className="lg:mx-10 md:mx-5 sm:mx-3 xsm:mx-1"> */}
+    <main className="px-3 lg:max-w-screen-lg mx-auto flex flex-col gap-9 w-full pb-10 pt-4 sm:max-w-screen-sm ">
       {/* today data */}
       {loadingCity ? <WeatherSkeleton/> :
       <>
-      <section className="space-y-4">
-        <div className="space-t-4 ">
+      <section className="lg:space-y-4 md:space-y-2 sm:space-y-1 xsm:space-y-1">
+        <div className="lg:space-t-4 md:space-t-2">
         <div className="text-center text-4xl">
       {/* <p className="flex gap-1 text-4xl items-end  "> */}
       <p>
@@ -168,7 +170,7 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
             {/* </p> */}
 
       </div>
-          <Container className="gap-10 px-6 items-center mt-6">
+          <Container className="lg:gap-10 px-6 items-center mt-6">
             <div className="flex flex-col px-4">
               <span className="text-5xl">
               {convertKelvinToCelsius(data?.list[0]?.main.temp ?? 296.37)}°C
@@ -226,7 +228,7 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
                           )}
                         />
           </Container>
-          <Container className=" px-4 text-black gap-2 justify-around w-full">
+          <Container className=" lg:px-4 md:px-3 text-black gap-2 justify-around w-full">
 <WeatherDetails visability={metertokm(data?.list[0]?.visibility ?? 1000)} 
 airPressure={`${data?.list[0]?.main.pressure}hPa`}
 windSpeed={windconv(data?.list[0]?.wind.speed ?? 5) }
@@ -299,7 +301,7 @@ export default function IndexPage() {
 
   return (
     <section className="container grid items-center">
-      <div className="flex w-screen flex-col items-start gap-2">
+      <div className="flex lg:w-screen md:w-fit sm:w-fit  flex-col items-center gap-2">
        
         <QueryClientProvider client={queryClient}>
           
