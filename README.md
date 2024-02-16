@@ -1,6 +1,6 @@
 ## Deployment
 
-deployment of this weather reporting app has been done using Vercel, Here you [go, check it yourself](https://react-weather-reports-git-next-weather-regnna.vercel.app/)
+deployment of this weather reporting app has been done using Vercel, Here you go, check it yourself [testing ground](https://react-weather-reports-git-next-weather-regnna.vercel.app/) and [Production](https://next-weather-6dx9ezs3b-regnna.vercel.app/)
 
 ## next-template
 
