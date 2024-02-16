@@ -98,7 +98,7 @@ function handleCurrentLocation(){
 </div>
         {/* <div></div> */}
         <div className="flex flex-1 mt-4 mx-6 justify-center space-x-2 align-top">
-          <div className="relative hidden md:flex">
+          <div className="relative  md:flex">
   <SearchBox
   value={city}
   onSubmit={handleSubmiSearch}
