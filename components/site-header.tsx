@@ -92,14 +92,14 @@ function handleCurrentLocation(){
   return (
     <header className=" bg-background sticky top-0  z-40 w-full border-b align-middle ">
       <div className="grid grid-flow-col justify-stretch
-      mb-{6} h-16 sm:justify-between sm:space-x-0  ">
-<div className="mt-4 mx-6">
+      mb-{6} h-16   ">
+<div className="mt-4 mx-6 justify-start">
         {/* <MainNav items={siteConfig.name}  /> */}
         <h1 className="text-4xl">{siteConfig.name}</h1>
 </div>
         {/* <div></div> */}
-        <div className="flex flex-1 mt-4 mx-6 justify-center space-x-2 align-top">
-          <div className="relative  md:flex">
+        <div className="flex flex-row  mt-4 mx-6 justify-center space-x-2 align-top ">
+          <div className="relative  flex">
   <SearchBox
   value={city}
   onSubmit={handleSubmiSearch}
@@ -119,7 +119,7 @@ function handleCurrentLocation(){
   {/* searchBox */}
 </div>
 
-        <div className="flex flex-1 mt-4 mx-6 gap-5 justify-center space-x-2 align-top " >
+        <div className="flex flex-row flex-1 mt-4 mx-6 gap-5 justify-end space-x-2 align-top  " >
         <div className="flex items-center justify-center h-5 w-5 mt-3 mr-3">
         <LocateFixed
               title="Your Current Location"

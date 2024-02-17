@@ -57,7 +57,7 @@ const queryClient = new QueryClient()
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className="flex">
+              <div className="flex h-screen">
                  <div  >{children}</div></div>
 
                 <Tosteer/>

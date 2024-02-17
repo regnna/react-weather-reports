@@ -86,7 +86,7 @@ async function  API(place:string){
 
   const {data}=await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_API_KEY}&cnt=56`)
   // const {data}=await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=pune&appid=b5a3f6ac1b020bd3d54bc6a319d146c2&cnt=56`)
-console.log("API data: ",data)
+// console.log("API data: ",data)
   // deta=data;
   // console.log("API data: ",deta)
 
@@ -108,7 +108,7 @@ console.log("API data: ",data)
     });
   }
   
-  console.log("FilterData:",filteredData); // This will print the filtered data
+  // console.log("FilterData:",filteredData); // This will print the filtered data
   filteredArray = Object.values(filteredData);
 
   
@@ -141,7 +141,7 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
 
   // const dailydata=datess(data);
 
-  console.log("data",data)
+  // console.log("data",data)
   if (isLoading) return (
     <div className="flex items-center min-h-screen justify-center">
       <LoadingSkeleton/>
@@ -158,10 +158,12 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
       {/* today data */}
       {loadingCity ? <WeatherSkeleton/> :
       <>
-      <section className="lg:space-y-4 md:space-y-2 sm:space-y-1 xsm:space-y-1">
+      <section className="lg:space-y-4 md:space-y-2 sm:space-y-2 xsm:space-y-1">
+      <div className="grid grid-rows-2 gap-4 ">
+        
         <div className="lg:space-t-4 md:space-t-2">
         <div className="text-center text-4xl">
-      {/* <p className="flex gap-1 text-4xl items-end  "> */}
+    {/* HEading containg the weekday & the date */}
       <p>
             {format(parseISO(data?.list[0]?.dt_txt ?? ' ' ),'EEEE')}
             
@@ -170,7 +172,8 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
             {/* </p> */}
 
       </div>
-          <Container className="lg:gap-10 px-6 items-center mt-6">
+          <Container className="lg:gap-10 md:gap-7 sm:gap-2  px-6 items-center mt-6">
+            {/* First row the left part */}
             <div className="flex flex-col px-4">
               <span className="text-5xl">
               {convertKelvinToCelsius(data?.list[0]?.main.temp ?? 296.37)}°C
@@ -185,42 +188,64 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
               <p className="text-xs space-x-2 ">
                 <span>
                 {convertKelvinToCelsius2(data?.list[0]?.main.temp_min ?? 0)}°C ↓{" "}
-                </span>
-                <span>
+                {/* </span> */}
+                {/* <span> */}
 {" "}                {convertKelvinToCelsius2(data?.list[0]?.main.temp_max ?? 296.37)}°C ↑
 
                 </span>
               </p>
             </div>
-            <div className="flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3">
-                    {data?.list.map((d, i) => (
-                      <div
-                        key={i}
-                        className="flex flex-col justify-between gap-2 items-center text-xs font-semibold "
-                      >
-                        <p className="whitespace-nowrap">
-                          {format(parseISO(d.dt_txt), "h:mm a")}
-                        </p>
-{/* <p>{d.weather[0].icon}</p> */}
-                        {/* <WeatherIcon iconName={d.weather[0].icon} /> */}
-                        <WeatherIcon
-                          iconName={getDayOrNightIcon(
-                            d.weather[0].icon,
-                            d.dt_txt
-                          )}
-                        />
-                        <p>{convertKelvinToCelsius(d?.main.temp ?? 0)}°</p>
-                      </div>
-                    ))}
-                  </div>
+            {/* First row the right part */}
+                            {/* <div className="flex gap-10 sm:gap-1 overflow-x-auto w-full justify-between pr-3">
+                                {data?.list.map((d, i) => (
+                                  <div
+                                    key={i}
+                                    className="flex flex-col justify-between gap-2 items-center text-xs font-semibold "
+                                  >
+                                    <p className="whitespace-nowrap">
+                                      {format(parseISO(d.dt_txt), "h:mm a")}
+                                    </p>
+                                    <WeatherIcon
+                                      iconName={getDayOrNightIcon(
+                                        d.weather[0].icon,
+                                        d.dt_txt
+                                      )}
+                                    />
+                                    <p>{convertKelvinToCelsius(d?.main.temp ?? 0)}°</p>
+                                  </div>
+                                ))}
+                              </div> */}
+
+<div className="flex  sm:gap-2 md:gap-6 lg:gap-10 overflow-x-auto w-full justify-between">
+  {data?.list.map((d, i) => (
+    <div
+      key={i}
+      className="flex flex-col justify-between gap-2 items-center text-xs sm:text-sm md:text-base lg:text-lg font-semibold"
+    >
+      <p className="whitespace-nowrap">
+        {format(parseISO(d.dt_txt), "h:mm a")}
+      </p>
+      <WeatherIcon
+        iconName={getDayOrNightIcon(
+          d.weather[0].icon,
+          d.dt_txt
+        )}
+      />
+      <p>{convertKelvinToCelsius(d?.main.temp ?? 0)}°</p>
+    </div>
+  ))}
+</div>
+
           </Container>
         </div>
-        <div className="flex gap-4">
+
+        {/* 2nd row containg weather */}
+        <div className="flex gap-4 sm:mt-5">
+          {/* <div className="grid grid-flow-dense gap-4 "> */}
           {/* left */}
-          <Container className="w-fit justify-center flex-col px-4 items-center">
+          <Container className="lg:w-fit justify-center flex-col px-4 items-center">
 
             <p className="capitalize text-center">{data?.list[0]?.weather[0].description}</p>
-            {/* <WeatherIcon iconName={data?.list[0]?.weather[0].icon} /> */}
             <WeatherIcon
                           iconName={getDayOrNightIcon(
                             data?.list[0]?.weather[0].icon ?? "",
@@ -228,35 +253,37 @@ const [loadingCity, ] = useAtom(loadingCityAtom)
                           )}
                         />
           </Container>
-          <Container className=" lg:px-4 md:px-3 text-black gap-2 justify-around w-full">
-<WeatherDetails visability={metertokm(data?.list[0]?.visibility ?? 1000)} 
-airPressure={`${data?.list[0]?.main.pressure}hPa`}
-windSpeed={windconv(data?.list[0]?.wind.speed ?? 5) }
-// sunrise={`${data?.city.sunrise ?? "6:00"}`}
-sunrise={format(
-  fromUnixTime(data?.city.sunrise ?? 1702949452),"H:mm"
-)}
-sunset={format(
-  fromUnixTime(data?.city.sunset ?? 1702517657),"H:mm"
-)}
-// {`${data?.city.sunset ?? "6:00"}`}
-humidity={`${data?.list[0].main.humidity ?? 99 }%`}
-/>
+          {/* Right */}
+          <Container className="  lg:px-4 md:px-3 text-black lg:gap-2 lg:justify-around md:justify-between justify-around w-full">
+                <WeatherDetails visability={metertokm(data?.list[0]?.visibility ?? 1000)} 
+                airPressure={`${data?.list[0]?.main.pressure}hPa`}
+                windSpeed={windconv(data?.list[0]?.wind.speed ?? 5) }
+                // sunrise={`${data?.city.sunrise ?? "6:00"}`}
+                sunrise={format(
+                  fromUnixTime(data?.city.sunrise ?? 1702949452),"H:mm"
+                )}
+                sunset={format(
+                  fromUnixTime(data?.city.sunset ?? 1702517657),"H:mm"
+                )}
+                // {`${data?.city.sunset ?? "6:00"}`}
+                humidity={`${data?.list[0].main.humidity ?? 99 }%`}
+                />
 
           </Container>
-          {/* right */}
-
+        </div>
         </div>
       </section>
       {/* 7 days forcast data  */}
-     <section className="flex w-full flex-col gap-4">
+      {/* <section className=" grid grid-rows-2 gap-4 "> */}
+
+     <section className="flex lg:w-full flex-col gap-4">
       <div className="text-center">
       <p className="text-4xl  ">Forcast (7 days)</p>
 
       </div>
 
 
-
+<div className="grid grid-rows-2 gap-4 ">
       {filteredArray.map((d:any,i:any)=>(
       <ForecastWeatherDetails 
       key={i}
@@ -284,13 +311,11 @@ humidity={`${data?.list[0].main.humidity ?? 99 }%`}
       />
 
       ))}
+      </div>
 
      </section>
      </>}
     </main>
-              
-
-    {/* {data.cod} */}
   </div>
   
 )}
@@ -301,7 +326,7 @@ export default function IndexPage() {
 
   return (
     <section className="container grid items-center">
-      <div className="flex lg:w-screen md:w-fit sm:w-fit  flex-col items-center gap-2">
+      <div className="flex lg:w-screen md:w-fit sm:max-w-screen sm:max-h-screen flex-col items-center gap-2">
        
         <QueryClientProvider client={queryClient}>
           
