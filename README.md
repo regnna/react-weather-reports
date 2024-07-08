@@ -20,5 +20,7 @@ npx create-next-app -e https://github.com/regnna/regnna_template .
 - Icons from [Lucide](https://lucide.dev)
 - Dark mode with `next-themes`
 - Tailwind CSS class sorting, merging and linting.
+- Jotai state managment Library
+- zod,react-query
 
 
